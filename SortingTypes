@@ -144,3 +144,86 @@ public class Main {
 
 	}
 }
+
+
+import java.util.*;
+
+public class Main {
+    public static void MergeSort(int[] arr,int l,int r){
+            if(l<r){
+
+                int m = l + (r-l) / 2;
+
+                MergeSort(arr,l,m);
+                MergeSort(arr,m+1,r);
+
+                sort(arr,l,m,r);
+
+
+            }
+
+
+    }
+    public static void sort(int[] arr,int left,int mid ,int right){
+
+        int sub1 = mid - left + 1;
+        int sub2 = right - mid;
+
+        int LEFT[] = new int[sub1];
+        int RIGHT[] = new int[sub2];
+
+        for(int i=0;i<sub1;i++){
+            LEFT[i] = arr[left + i];
+        }
+        for(int j=0;j<sub2;j++){
+            RIGHT[j] = arr[mid + 1 + j];
+        }
+        int i=0, j =0;
+
+        int k = left;
+        while(i < sub1 && j < sub2){
+            if(LEFT[i]<=RIGHT[j]){
+                arr[k] = LEFT[i];
+                i++;
+            }
+            else{
+                arr[k] = RIGHT[j];
+                j++;
+            }
+            k++;
+        }
+
+        while( i < sub1){
+
+            arr[k] = LEFT[i];
+            i++;
+            k++;
+        }
+        while( j < sub2){
+
+            arr[k] = RIGHT[j];
+            j++;
+            k++;
+        }
+
+
+    }
+
+
+    public static void main(String[] args){
+
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+
+        int[] arr = new int[n];
+        for(int i =0;i<n;i++){
+            arr[i] = in.nextInt();
+        }
+        MergeSort(arr,0,n-1);
+        for(int i =0;i<n;i++){
+            System.out.print(arr[i]+" ");
+        }
+
+
+    }
+}
